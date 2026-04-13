@@ -87,7 +87,7 @@
   --font-body:   'Raleway', sans-serif;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   background: var(--cream);
@@ -96,6 +96,7 @@ body {
   font-weight: 400;
   font-size: 16px;
   line-height: 1.75;
+  overflow-x: hidden;
 }
 
 /* ── NAV ── */
@@ -930,9 +931,10 @@ p:last-child { margin-bottom: 0; }
   row-gap: 2rem;
   align-items: stretch;
 }
-.contacts-left  { grid-column: 1; grid-row: 1 / 3; display: flex; flex-direction: column; }
-.contacts-photo { grid-column: 2; grid-row: 1; align-self: start; }
-.contacts-right { grid-column: 2; grid-row: 2; align-self: start; }
+.contacts-heading-group { grid-column: 1; grid-row: 1; }
+.contact-btns { grid-column: 1; grid-row: 2; align-self: center; margin-top: 0; padding-top: 0; }
+.contacts-photo { grid-column: 2; grid-row: 1; align-self: end; }
+.contacts-right { grid-column: 2; grid-row: 2; align-self: center; }
 .contacts-photo {
   align-self: start;
   width: 100%;
@@ -1254,13 +1256,12 @@ footer {
 
   /* Contacts */
   .contacts-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .contacts-left, .contacts-photo, .contacts-right { grid-column: auto; grid-row: auto; }
-  .contacts-left { display: block; }
+  .contacts-heading-group, .contact-btns, .contacts-photo, .contacts-right { grid-column: auto; grid-row: auto; }
   .contacts-photo { height: 65vw; max-height: 280px; aspect-ratio: auto; order: -1; }
-  .contact-btns { margin-top: 0; padding-top: 0; }
 
   /* Footer */
-  footer { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+  footer { flex-direction: column; align-items: flex-start; gap: 0.8rem; padding: 1.8rem 4vw; }
+  .footer-links { flex-wrap: wrap; gap: 0.8rem 1.2rem; }
 
   /* Sticky */
   .sticky-cta { right: 1rem; bottom: 1rem; }
@@ -1653,23 +1654,23 @@ footer {
 <section id="contacts" class="reveal">
   <div class="container">
     <div class="contacts-grid">
-      <div class="contacts-left">
+      <div class="contacts-heading-group">
         <h2 class="contacts-heading">Если вам нужна психологическая помощь или консультация — напишите.</h2>
         <p class="contacts-sub">Выберите удобный способ связи.</p>
-        <div class="contact-btns">
-          <a href="https://vk.com/polaveresk" class="btn-contact">
-            <span class="btn-contact-icon">ВК</span>
-            ВКонтакте — vk.com/polaveresk
-          </a>
-          <a href="https://t.me/po_dudnik" class="btn-contact">
-            <span class="btn-contact-icon">TG</span>
-            Telegram — @po_dudnik
-          </a>
-          <a href="https://max.ru/u/f9LHodD0cOIaONoXChazHGTND0MVfbYZ1CQd-Mde15s9GL085apfO-8_oCM" class="btn-contact">
-            <span class="btn-contact-icon">МА</span>
-            МАХ
-          </a>
-        </div>
+      </div>
+      <div class="contact-btns">
+        <a href="https://vk.com/polaveresk" class="btn-contact">
+          <span class="btn-contact-icon">ВК</span>
+          ВКонтакте — vk.com/polaveresk
+        </a>
+        <a href="https://t.me/po_dudnik" class="btn-contact">
+          <span class="btn-contact-icon">TG</span>
+          Telegram — @po_dudnik
+        </a>
+        <a href="https://max.ru/u/f9LHodD0cOIaONoXChazHGTND0MVfbYZ1CQd-Mde15s9GL085apfO-8_oCM" class="btn-contact">
+          <span class="btn-contact-icon">МА</span>
+          МАХ
+        </a>
       </div>
       <div class="contacts-photo">
         <picture>
