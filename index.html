@@ -444,6 +444,7 @@ p:last-child { margin-bottom: 0; }
 .formats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  align-items: start;
   gap: 2px;
   background: var(--beige);
   margin-top: 1rem;
@@ -521,7 +522,8 @@ p:last-child { margin-bottom: 0; }
   color: var(--rust);
   margin-top: 0.8rem;
 }
-.format-toggle {
+.format-toggle-open,
+.format-toggle-close {
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.1em;
@@ -531,7 +533,12 @@ p:last-child { margin-bottom: 0; }
   cursor: pointer;
   user-select: none;
 }
-.format-card:hover .format-toggle { color: var(--rust); }
+.format-card:hover .format-toggle-open,
+.format-card:hover .format-toggle-close { color: var(--rust); }
+.format-toggle-open { margin-top: 0.5rem; }
+.format-toggle-close { display: none; margin-top: 1.5rem; }
+.format-card.active .format-toggle-open { display: none; }
+.format-card.active .format-toggle-close { display: block; }
 
 /* ── HOW ── */
 .how-items { }
@@ -1260,6 +1267,10 @@ footer {
   .second-cta-btns { flex-direction: column; align-items: center; }
   .btn-solid-light, .btn-outline-light { width: 100%; max-width: 300px; text-align: center; }
 
+  /* Formats — hide collapse button on mobile */
+  .format-toggle-close { display: none !important; }
+  .format-card.active .format-toggle-open { display: block; }
+
   /* Contacts */
   .contacts-grid { grid-template-columns: 1fr; gap: 2rem; }
   .contacts-heading-group, .contact-btns, .contacts-photo, .contacts-right { grid-column: auto; grid-row: auto; }
@@ -1369,10 +1380,10 @@ footer {
             <span class="about-stat-label">формата работы</span>
           </div>
         </div>
-        <p>Я занимаюсь психологией с 2004 года. Сначала для себя, потом для других.</p>
+        <p><strong>Я занимаюсь психологией с 2004 года. Сначала для себя, потом для других.</strong></p>
         <p>Мой путь в психологии начался гораздо раньше, чем я сделала это профессией. Сперва было художественное и педагогическое образование. И психология — психоанализ — как способ познания мира. За это время побывала по обе стороны: была клиентом, студентом, участником групп — и практикующим специалистом.</p>
         <p><strong>В работе я беру за основу психоаналитический подход.</strong><br>Я также изучала системные семейные расстановки и трансперсональную психологию — это дало мне способность видеть процессы системно, структурно. Но психоаналитическая психотерапия — мой давний интерес, любимый метод. Это тонкая и бережная работа с психикой, возможность постепенно пересобрать её заново, из глубины.<br>Или сделать видимыми «слепые пятна», если масштабная работа не нужна.</p>
-        <p><strong>Моя задача</strong> — не только помочь исследовать внутренний мир или найти решение ситуации. В терапии клиент неизбежно обучается — совершенствуется его способность к самопомощи. Со временем моё сопровождение перестаёт быть нужным. <strong>И это тоже цель работы.</strong></p>
+        <p><strong>Моя задача</strong> — <strong>не только помочь исследовать внутренний мир или найти решение ситуации.</strong> В терапии клиент неизбежно обучается — совершенствуется его способность к самопомощи. Со временем моё сопровождение перестаёт быть нужным. <strong>И это тоже цель работы.</strong></p>
       </div>
     </div>
   </div>
@@ -1402,12 +1413,12 @@ footer {
     <h2>Форматы работы</h2>
     <div class="formats-grid">
 
-      <div class="format-card priority" onclick="toggleFormat(this)">
+      <div class="format-card priority">
         <div class="format-badge">Идёт набор</div>
         <div class="format-number">01</div>
         <h3 class="format-title">Групповая терапия</h3>
         <p class="format-tagline">Работа в малой группе — один из самых мощных форматов.</p>
-        <div class="format-toggle">Подробнее ↓</div>
+        <div class="format-toggle-open" onclick="toggleFormat(this.closest('.format-card'))">Подробнее ↓</div>
         <div class="format-body">
           <p>Группа — это микромодель социума. Здесь можно наблюдать, как вы строите контакт, реагируете, избегаете или ищете близости — и исследовать это в безопасной среде.</p>
           <p>Каждую неделю мы встречаемся, чтобы говорить о том, что важно, получать обратную связь, наблюдать за своим откликом. В группе вы видите себя в отношениях с реальными людьми — здесь и сейчас.</p>
@@ -1417,14 +1428,15 @@ footer {
             <p><strong>Формат:</strong> онлайн или очно (Санкт-Петербург, м. Горьковская). Раз в неделю, 90 минут. До 7 человек. Необходимо предварительное собеседование.</p>
             <div class="format-price">2&nbsp;500&nbsp;₽ / встреча</div>
           </div>
+          <div class="format-toggle-close" onclick="toggleFormat(this.closest('.format-card'))">Свернуть ↑</div>
         </div>
       </div>
 
-      <div class="format-card" onclick="toggleFormat(this)">
+      <div class="format-card">
         <div class="format-number">02</div>
         <h3 class="format-title">Индивидуальная психотерапия</h3>
         <p class="format-tagline">Долгосрочная работа — в глубину.</p>
-        <div class="format-toggle">Подробнее ↓</div>
+        <div class="format-toggle-open" onclick="toggleFormat(this.closest('.format-card'))">Подробнее ↓</div>
         <div class="format-body">
           <p>Регулярные встречи один на один, обычно 1–3 раза в неделю, в одно и то же время. Постоянство создаёт ту самую среду, в которой становится возможным настоящее изменение.</p>
           <p>В терапии мы собираем пазл — ваши чувства, отношения, история. Важно не просто решить один вопрос, но понять, как часть связана с целым. Терапия — это лаборатория, в которой можно безопасно увидеть и поменять паттерны поведения и восприятия.</p>
@@ -1433,14 +1445,15 @@ footer {
             <p><strong>Формат:</strong> онлайн или очно. 1–3 раза в неделю.</p>
             <div class="format-price">Первичная встреча — 4&nbsp;500&nbsp;₽</div>
           </div>
+          <div class="format-toggle-close" onclick="toggleFormat(this.closest('.format-card'))">Свернуть ↑</div>
         </div>
       </div>
 
-      <div class="format-card" onclick="toggleFormat(this)">
+      <div class="format-card">
         <div class="format-number">03</div>
         <h3 class="format-title">Краткосрочное консультирование</h3>
         <p class="format-tagline">Когда нужна помощь в конкретной ситуации.</p>
-        <div class="format-toggle">Подробнее ↓</div>
+        <div class="format-toggle-open" onclick="toggleFormat(this.closest('.format-card'))">Подробнее ↓</div>
         <div class="format-body">
           <p>Иногда что-то происходит — и нужно разобраться в ситуации, посмотреть на неё с другой стороны, получить поддержку и понять, как действовать дальше.</p>
           <p>Несколько встреч с конкретным фокусом: сложный выбор, конфликт, рабочий кризис, тревога перед важным событием, потеря, смена жизненного этапа.</p>
@@ -1449,6 +1462,7 @@ footer {
             <p><strong>Формат:</strong> онлайн или очно (Санкт-Петербург, м. Горьковская).</p>
             <div class="format-price">4&nbsp;500&nbsp;₽ / сессия</div>
           </div>
+          <div class="format-toggle-close" onclick="toggleFormat(this.closest('.format-card'))">Свернуть ↑</div>
         </div>
       </div>
 
@@ -1661,9 +1675,9 @@ footer {
     <div class="contacts-grid">
       <div class="contacts-heading-group">
         <h2 class="contacts-heading">Если вам нужна психологическая помощь или консультация — напишите.</h2>
-        <p class="contacts-sub">Выберите удобный способ связи.</p>
       </div>
       <div class="contact-btns">
+        <p class="contacts-sub">Выберите удобный способ связи.</p>
         <a href="https://vk.com/polaveresk" class="btn-contact">
           <span class="btn-contact-icon">ВК</span>
           ВКонтакте — vk.com/polaveresk
@@ -1720,17 +1734,13 @@ footer {
 <script>
 function toggleFormat(card) {
   const body = card.querySelector('.format-body');
-  const toggle = card.querySelector('.format-toggle');
   const isOpen = body.classList.contains('open');
-  document.querySelectorAll('.format-card').forEach(c => {
-    c.classList.remove('active');
-    const b = c.querySelector('.format-body');
-    if (b) { b.classList.remove('open'); c.querySelector('.format-toggle').textContent = 'Подробнее ↓'; }
-  });
-  if (!isOpen) {
+  if (isOpen) {
+    body.classList.remove('open');
+    card.classList.remove('active');
+  } else {
     body.classList.add('open');
     card.classList.add('active');
-    toggle.textContent = 'Свернуть ↑';
   }
 }
 
